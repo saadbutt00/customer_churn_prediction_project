@@ -83,6 +83,6 @@ try:
     
     # Display results
     st.write(f"**Prediction**: {'Churn' if new_churn_prediction[0] == 1 else 'No Churn'}")
- #   st.write(f"**Prediction Probability**: Churn: {prediction_proba[0][1]:.2f}, No Churn: {prediction_proba[0][0]:.2f}")
+    st.write(f"**Prediction Probability**: Churn: {prediction_proba[0][1]:.2f}, No Churn: {prediction_proba[0][0]:.2f}")
 except Exception as e:
     st.error(f"Error during prediction: {e}")
