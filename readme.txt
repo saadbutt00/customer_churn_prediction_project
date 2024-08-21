@@ -15,6 +15,6 @@ Files
 - `features.pkl`: List of feature names used by the model.
 - `requirements.txt`: List of Python dependencies required to run the app.
 
-To run this app, click on it:
+To run this app, use this link:
 
 https://customer-churn-prediction-bjh.streamlit.app/
