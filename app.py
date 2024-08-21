@@ -66,7 +66,10 @@ input_df = user_input_features()
 # Encode user input using the label encoders
 for column in input_df.columns:
     if column in label_encoders:
-        input_df[column] = label_encoders[column].transform(input_df[column])
+        try:
+            input_df[column] = label_encoders[column].transform(input_df[column])
+        except ValueError:
+            st.warning(f"Label encoder for '{column}' encountered an issue. Check if the input value is correct.")
     else:
         st.warning(f"Label encoder for '{column}' not found. Please check your input.")
 
@@ -74,9 +77,12 @@ for column in input_df.columns:
 input_df = input_df.reindex(columns=feature_names, fill_value=0)
 
 # Make prediction
-new_churn_prediction = rf_model.predict(input_df)
-prediction_proba = rf_model.predict_proba(input_df)
-
-# Display results
-st.write(f"**Prediction**: {'Churn' if new_churn_prediction[0] == 1 else 'No Churn'}")
-st.write(f"**Prediction Probability**: Churn: {prediction_proba[0][1]:.2f}, No Churn: {prediction_proba[0][0]:.2f}")
+try:
+    new_churn_prediction = rf_model.predict(input_df)
+    prediction_proba = rf_model.predict_proba(input_df)
+    
+    # Display results
+    st.write(f"**Prediction**: {'Churn' if new_churn_prediction[0] == 1 else 'No Churn'}")
+    st.write(f"**Prediction Probability**: Churn: {prediction_proba[0][1]:.2f}, No Churn: {prediction_proba[0][0]:.2f}")
+except Exception as e:
+    st.error(f"Error during prediction: {e}")
