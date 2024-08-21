@@ -27,8 +27,6 @@ except FileNotFoundError as e:
 try:
     with open(features_path, 'rb') as feature_file:
         feature_names = pickle.load(feature_file)
-    # Debug output
-    st.write(f"Feature names loaded: {feature_names}")
 except FileNotFoundError as e:
     st.error(f"Error: {e}. The features file was not found at {features_path}.")
     st.stop()
@@ -42,7 +40,7 @@ def user_input_features():
         'gender': [st.sidebar.selectbox('Gender', options=['Male', 'Female'])],
         'Partner': [st.sidebar.selectbox('Partner', options=['Yes', 'No'])],
         'Dependents': [st.sidebar.selectbox('Dependents', options=['Yes', 'No'])],
-        'tenure': [st.sidebar.slider('Tenure (Months)', 0, 72, 12)],
+        'tenure': [st.sidebar.slider('Tenure (Months)', 0, 12)],
         'PhoneService': [st.sidebar.selectbox('Phone Service', options=['Yes', 'No'])],
         'MultipleLines': [st.sidebar.selectbox('Multiple Lines', options=['Yes', 'No'])],
         'OnlineSecurity': [st.sidebar.selectbox('Online Security', options=['Yes', 'No'])],
@@ -69,9 +67,11 @@ for column in input_df.columns:
         try:
             input_df[column] = label_encoders[column].transform(input_df[column])
         except ValueError:
-            st.warning(f"Label encoder for '{column}' encountered an issue. Check if the input value is correct.")
+            # Replace with a default or handle as needed
+            input_df[column] = 0
     else:
-        st.warning(f"Label encoder for '{column}' not found. Please check your input.")
+        # Handle missing encoders by replacing with a default or handling as needed
+        input_df[column] = 0
 
 # Ensure input_df has the same columns as the model's training data
 input_df = input_df.reindex(columns=feature_names, fill_value=0)
