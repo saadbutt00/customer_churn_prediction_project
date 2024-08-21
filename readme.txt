@@ -15,12 +15,6 @@ Files
 - `features.pkl`: List of feature names used by the model.
 - `requirements.txt`: List of Python dependencies required to run the app.
 
-Installation
+To run this app, click on it:
 
-To run this app locally, follow these steps:
-
-1. Clone the Repository
-
-   bash
-   git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository
+https://customer-churn-prediction-bjh.streamlit.app/
