@@ -3,9 +3,9 @@ import streamlit as st
 import pandas as pd
 
 # Define file paths
-model_path = 'F:/MyProject/customer churn prediction/rf_model.pkl'
-encoder_path = 'F:/MyProject/customer churn prediction/label_encoders.pkl'
-features_path = 'F:/MyProject/customer churn prediction/features.pkl'
+model_path = 'rf_model.pkl'
+encoder_path = 'label_encoders.pkl'
+features_path = 'features.pkl'
 
 # Load the trained model
 try:
