@@ -67,8 +67,6 @@ input_df = user_input_features()
 for column in input_df.columns:
     if column in label_encoders:
         input_df[column] = label_encoders[column].transform(input_df[column])
-    else:
-        st.warning(f"Label encoder for '{column}' not found. Please check your input.")
 
 # Ensure input_df has the same columns as the model's training data
 input_df = input_df.reindex(columns=feature_names, fill_value=0)
