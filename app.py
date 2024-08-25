@@ -8,31 +8,18 @@ encoder_path = 'label_encoders.pkl'
 features_path = 'features.pkl'
 
 # Load the trained model
-try:
-    with open(model_path, 'rb') as model_file:
-        rf_model = pickle.load(model_file)
-except FileNotFoundError as e:
-    st.error(f"Error: {e}. The model file was not found at {model_path}.")
-    st.stop()
+
+with open(model_path, 'rb') as model_file:
+    rf_model = pickle.load(model_file)
 
 # Load the label encoders
-try:
-    with open(encoder_path, 'rb') as encoder_file:
-        label_encoders = pickle.load(encoder_file)
-except FileNotFoundError as e:
-    st.error(f"Error: {e}. The label encoders file was not found at {encoder_path}.")
-    st.stop()
+with open(encoder_path, 'rb') as encoder_file:
+    label_encoders = pickle.load(encoder_file)
 
 # Load the feature names
-try:
-    with open(features_path, 'rb') as feature_file:
-        feature_names = pickle.load(feature_file)
-    # Debug output
-    st.write(f"Feature names loaded: {feature_names}")
-except FileNotFoundError as e:
-    st.error(f"Error: {e}. The features file was not found at {features_path}.")
-    st.stop()
-
+with open(features_path, 'rb') as feature_file:
+    feature_names = pickle.load(feature_file)
+    
 # Streamlit app
 st.title("Customer Churn Prediction")
 
@@ -42,7 +29,7 @@ def user_input_features():
         'gender': [st.sidebar.selectbox('Gender', options=['Male', 'Female'])],
         'Partner': [st.sidebar.selectbox('Partner', options=['Yes', 'No'])],
         'Dependents': [st.sidebar.selectbox('Dependents', options=['Yes', 'No'])],
-        'tenure': [st.sidebar.slider('Tenure (Months)', 0, 72, 12)],
+        'tenure': [st.sidebar.slider('Tenure (Months)', 0, 12)],
         'PhoneService': [st.sidebar.selectbox('Phone Service', options=['Yes', 'No'])],
         'MultipleLines': [st.sidebar.selectbox('Multiple Lines', options=['Yes', 'No'])],
         'OnlineSecurity': [st.sidebar.selectbox('Online Security', options=['Yes', 'No'])],
