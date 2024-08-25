@@ -19,7 +19,9 @@ with open(encoder_path, 'rb') as encoder_file:
 # Load the feature names
 with open(features_path, 'rb') as feature_file:
     feature_names = pickle.load(feature_file)
-    
+
+st.set_page_config(page_title="Customer Churn Prediction", page_icon="⭐", layout="wide", initial_sidebar_state="expanded")
+
 # Streamlit app
 st.title("Customer Churn Prediction")
 
